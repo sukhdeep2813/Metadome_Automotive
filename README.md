@@ -17,9 +17,6 @@ Tech Stack - Clearly states Unity 3D, C#, and the asset store sport car model
    cd Metadome_Automotive
 
 
-
-   # Metadome Automotive
-
 ## Comprehensive Documentation
 
 ### 1. String Normalization Pipeline
@@ -43,6 +40,56 @@ Hierarchy management is crucial for maintaining the organizational structure of 
 - **Parent-Child Relationships**: Establishing clear parent-child relationships for various components.
 - **Dynamic Updates**: Facilitating dynamic updates to the hierarchy without performance hits.
 - **Visualization**: Providing tools for visualizing hierarchies for better understanding and debugging.
+
+##UpdateCar
+```bash
+void UpdateCar(Color color, string message)
+    {
+        if (carBody == null) return;
+        Material[] currentMaterials = carBody.materials;
+
+        if (currentMaterials.Length > 2)
+        {
+            currentMaterials[2].SetColor("_BaseColor", color);
+            currentMaterials[2].SetColor("_Color", color);
+            currentMaterials[2].globalIlluminationFlags = MaterialGlobalIlluminationFlags.None;
+            carBody.materials = currentMaterials;
+        }
+
+        feedbackText.text = message;
+        Debug.Log(message);
+    }
+}
+````
+##ApplyAISuggestion 
+```bash
+  public void ApplyAISuggestion()
+  {
+    
+      string input = themeInput.text.ToLower().Trim();
+
+      if (input.Contains("sporty"))
+      {
+          UpdateCar(Color.red, "AI SUGGESTION: Racing Red & Performance Tuned.");
+      }
+      else if (input.Contains("luxury"))
+      {
+          UpdateCar(new Color(0.1f, 0.1f, 0.1f), "AI SUGGESTION: Obsidian Black & Chrome Finish.");
+      }
+      else if (input.Contains("modern"))
+      {
+          UpdateCar(Color.blue, "AI SUGGESTION: Electric Blue & Tech-Focused Interior.");
+      }
+      else if (input.Contains("eco") || input.Contains("green"))
+      {
+          UpdateCar(Color.green, "AI SUGGESTION: Forest Green & Sustainable Materials.");
+      }
+      else
+      {
+          feedbackText.text = "Try 'sporty', 'luxury', 'modern', or 'eco'.";
+      }
+  }
+````
 
 ## Conclusion
 This documentation outlines the key components and functionalities of the Metadome Automotive project.
